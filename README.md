@@ -29,3 +29,5 @@ Developed a Bluetooth-controlled home appliance system using an ESP32 microcontr
 • Light (connected to pin 2)
 • Fan (connected to pin 4)
 • Bluetooth-enabled mobile device for command input
+
+![Image](https://github.com/user-attachments/assets/4d003afb-823f-41ff-8632-8190c867e9e8)
