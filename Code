@@ -1,0 +1,37 @@
+#include "BluetoothSerial.h"
+BluetoothSerial ESP_BT;
+
+String command = "";
+
+void setup() {
+  Serial.begin(115200);
+  ESP_BT.begin("ESP32_SpeechControl"); 
+  pinMode(2, OUTPUT); // For Light
+  pinMode(4, OUTPUT); // For Fan
+  digitalWrite(2, LOW);
+  digitalWrite(4, LOW);
+  Serial.println("Bluetooth Device is Ready to Pair");
+}
+
+void loop() {
+  if (ESP_BT.available()) {
+    char c = ESP_BT.read();
+    if (c == '\n') {
+      command.trim();
+      Serial.println("Command: " + command);
+
+      if (command == "turn on light") digitalWrite(2, HIGH);
+      else if (command == "turn off light") digitalWrite(2, LOW);
+      else if (command == "turn on fan") digitalWrite(4, HIGH);
+      else if (command == "turn off fan") digitalWrite(4, LOW);
+      else if (command == "all off") {
+        digitalWrite(2, LOW);
+        digitalWrite(4, LOW);
+      }
+
+      command = "";
+    } else {
+      command += c;
+    }
+  }
+}
